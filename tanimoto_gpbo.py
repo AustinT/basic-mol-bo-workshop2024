@@ -119,11 +119,11 @@ def run_tanimoto_gpbo(
 
         # Define acqusition function
         # We use UCB with random beta
-        # chosen to be between 0.001 (pure exploitation)
+        # chosen to be between 0.01 (pure exploitation)
         # and 1.0 (pure exploration, i.e. random points will have a higher value than incumbant best point).
         # For the last round, we use beta=0 (pure exploitation).
         if bo_iter <= max_bo_iter:
-            ucb_beta = 10.0 ** rng.uniform(-3, 0)
+            ucb_beta = 10.0 ** rng.uniform(-2, 0)
             batch_size_this_iter = bo_batch_size
         else:
             ucb_beta = 0.0
