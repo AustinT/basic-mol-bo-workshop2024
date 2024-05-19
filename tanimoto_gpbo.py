@@ -45,7 +45,7 @@ def get_gp_pred_on_smiles(
     smiles_list: list[str],
     model,
     device: torch.device,
-    screen_batch_size: int = 1000,
+    screen_batch_size: int = 100,
 ) -> tuple[np.ndarray, np.ndarray]:
     fps = smiles_to_fingerprint_arr(
         smiles_list,
