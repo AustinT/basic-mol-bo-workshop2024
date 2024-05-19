@@ -7,6 +7,8 @@ from typing import Callable
 from mol_ga.mol_libraries import random_zinc
 from tdc import Oracle
 
+from tanimoto_gpbo import run_tanimoto_gpbo
+
 
 class OracleWrapper:
     def __init__(self, oracle: Callable[[list[str]], list[float]]):
@@ -64,7 +66,9 @@ if __name__ == "__main__":
         random_smiles = list(dict.fromkeys(random_smiles))[: args.budget]  # remove duplicates
         task(random_smiles)
     elif args.method == "tanimoto_gpbo":
-        raise NotImplementedError
+        run_tanimoto_gpbo(
+            oracle=task, smiles_bank=random_zinc(size=250_000, rng=rng), rng=rng, oracle_budget=args.budget
+        )
     else:
         raise ValueError(f"Unknown method: {args.method}")
 
