@@ -1,29 +1,10 @@
-# Python Template
+# Bayesian optimization for molecules
 
-**Project description here**
+A minimal proof-of-concept repo showing BO with the Tanimoto kernel to
+perform well.
 
-This is a template project so I don't need to keep setting up pre-commit.
+Main script is `main.py`.
 
 ## Development
 
-### Installation
-
-**Installation instructions here**
-
-### Formatting
-
-Use pre-commit to enforce formatting, large file checks, etc.
-
-If not already installed in your environment, run:
-
-```bash
-conda install pre-commit
-```
-
-To install the precommit hooks:
-
-```bash
-pre-commit install
-```
-
-Now a series of useful checks will be run before any commit.
+Please use pre-commit for code formatting / linting.
