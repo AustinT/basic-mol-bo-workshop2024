@@ -23,7 +23,7 @@ def binary_similarity_objective(s1: str, s2: str):
     return TanimotoSimilarity(fp1, fp2)
 
 
-def main(target_smiles: str):
+def main(target_smiles: str, max_generations: int):
     rng = random.Random()
 
     def batch_objective(smiles_list):
@@ -34,7 +34,7 @@ def main(target_smiles: str):
     ga_output = default_ga(
         starting_population_smiles=random_zinc(10_000, rng=rng) + [target_smiles],
         scoring_function=batch_objective,
-        max_generations=1000,
+        max_generations=max_generations,
         offspring_size=100,
         population_size=10_000,
         rng=rng,
@@ -54,8 +54,11 @@ def main(target_smiles: str):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    logging.basicConfig(
+        level=logging.INFO, stream=sys.stdout, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
     parser = argparse.ArgumentParser()
     parser.add_argument("target_smiles", type=str)
+    parser.add_argument("--generations", type=int, default=100)
     args = parser.parse_args()
-    main(args.target_smiles)
+    main(args.target_smiles, args.generations)
