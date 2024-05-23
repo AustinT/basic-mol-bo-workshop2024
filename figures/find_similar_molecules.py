@@ -17,7 +17,7 @@ def binary_similarity_objective(s1: str, s2: str):
     m2 = Chem.MolFromSmiles(s2)
     if m1 is None or m2 is None:
         return 0.0
-    kwargs = dict(radius=2, useFeatures=True, useCounts=False)
+    kwargs = dict(radius=2, useCounts=False)
     fp1 = AllChem.GetMorganFingerprint(m1, **kwargs)
     fp2 = AllChem.GetMorganFingerprint(m2, **kwargs)
     return TanimotoSimilarity(fp1, fp2)
