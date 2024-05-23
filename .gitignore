@@ -1,3 +1,7 @@
+# Images
+*.pdf
+*.png
+
 # Development files
 *.swp
 
