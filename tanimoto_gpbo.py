@@ -3,6 +3,7 @@ from __future__ import annotations
 import heapq
 import logging
 import random
+import subprocess
 import sys
 from pprint import pformat
 from typing import Callable
@@ -189,6 +190,8 @@ def run_tanimoto_gpbo(
         )
 
         # Free up GPU memory for next iteration by deleting the model
+        if torch.cuda.is_available():
+            bo_loop_logger.debug(subprocess.getoutput("nvidia-smi"))
         del gp_model
         torch.cuda.empty_cache()
 
