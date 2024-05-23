@@ -20,7 +20,7 @@ from trf23.tanimoto_gp import TanimotoKernelGP, batch_predict_mu_std_numpy
 rdBase.DisableLog("rdApp.error")
 
 FP_DIM = 2048
-FP_RADIUS = 4
+FP_RADIUS = 3
 GP_MEAN = 0.00
 
 stream_handler = logging.StreamHandler(sys.stdout)
