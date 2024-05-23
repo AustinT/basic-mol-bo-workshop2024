@@ -4,7 +4,6 @@ import json
 import random
 from typing import Callable
 
-from mol_ga.mol_libraries import random_zinc
 from tdc import Oracle
 
 from tanimoto_gpbo import run_tanimoto_gpbo
@@ -60,15 +59,18 @@ if __name__ == "__main__":
     # Create oracle
     task = OracleWrapper(oracle=Oracle(args.oracle))
 
+    # Load SMILES bank
+    with open("zinc.tab") as f:
+        smiles_bank = [line.strip().strip('"') for line in f.readlines()]
+        smiles_bank = smiles_bank[1:]  # remove header
+        smiles_bank = list(set(smiles_bank))  # remove duplicates
+
     # Run all tasks
     if args.method == "screening":
-        random_smiles = random_zinc(size=2 * args.budget, rng=rng)  # double the budget to remove duplicates
-        random_smiles = list(dict.fromkeys(random_smiles))[: args.budget]  # remove duplicates
+        random_smiles = rng.sample(smiles_bank, args.budget)
         task(random_smiles)
     elif args.method == "tanimoto_gpbo":
-        run_tanimoto_gpbo(
-            oracle=task, smiles_bank=random_zinc(size=250_000, rng=rng), rng=rng, oracle_budget=args.budget
-        )
+        run_tanimoto_gpbo(oracle=task, smiles_bank=smiles_bank, rng=rng, oracle_budget=args.budget)
     else:
         raise ValueError(f"Unknown method: {args.method}")
 
