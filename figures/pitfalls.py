@@ -78,12 +78,14 @@ if __name__ == "__main__":
 
     # Plot 1: just plot the data
     X_plot = np.linspace(0, 1, 250)
-    plt.plot(X_plot, f(X_plot), "r:", label="True function")
-    plt.plot(X_sample, Y_sample, "ko", markersize=5, label="Observations")
-    plt.xlabel("$x$")
-    plt.ylabel("$f(x)$")
-    plt.savefig("data.pdf")
-    plt.close()
+    fig_scale = 0.5
+    with plt.rc_context({"figure.figsize": [x * fig_scale for x in plt.rcParams["figure.figsize"]]}):
+        plt.plot(X_plot, f(X_plot), "r:", label="True function")
+        plt.plot(X_sample, Y_sample, "ko", markersize=5, label="Observations")
+        plt.xlabel("$x$")
+        plt.ylabel("$f(x)$")
+        plt.savefig("data.pdf")
+        plt.close()
     del X_plot
 
     # Plot 2: prior width, fixed lengthscale of 0.05
