@@ -127,11 +127,11 @@ if __name__ == "__main__":
     plot_gp_and_acquisition(
         X_sample,
         Y_sample,
-        lengthscale=5.0,
+        lengthscale=50.0,
         kernel_amplitude=amplitude,
         noise=noise,
         subplot_base=2,
-        title_suffix="$\\ell=5.0$",
+        title_suffix="$\\ell=50.0$",
     )
     plt.savefig("lengthscale.pdf")
     plt.close()
