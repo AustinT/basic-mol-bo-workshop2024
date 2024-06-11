@@ -22,6 +22,8 @@ python parse_pmo_results.py bo_results/*.json
 Log files can be found in `tanimoto_bo_logs.tar.gz`.
 These logs contain the entire history of the BO trajectory.
 
+Finally, the `figures/` directory contains some scripts to produce figures.
+
 ## Installation
 
 Running the code requires:
